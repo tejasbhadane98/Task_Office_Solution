@@ -11,15 +11,15 @@ const jwt = require("jsonwebtoken")
 router.post("/signUp",
     body('email').isEmail(),
     body('password').isLength({ min: 8, max: 16 }),
-    body('confirmpassword').isLength({ min: 8, max: 16 }),async (req, res) => {
+    body('confirmPassword').isLength({ min: 8, max: 16 }),async (req, res) => {
     try {
         // console.log(req.body)
-        let {email, password, confirmpassword} = req.body
+        let {email, password, confirmPassword} = req.body
         let user = await User.findOne({email})
         if(user){
-            return res.json({error:"user already exits"})
+            return res.json({error:"User already exits"})
         };
-        if(password!==confirmpassword){
+        if(password!==confirmPassword){
             return res.json({
                 error:"Password and confirm password does not match"
             })
@@ -27,7 +27,7 @@ router.post("/signUp",
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             // console.log("sign up error called",errors,req.body.confirmpassword)
-            return res.status(400).json({ error: "minimum length of password should be 8" });
+            return res.status(400).json({ error: "Minimum length of password should be 8" });
         }
         
       
@@ -49,7 +49,7 @@ router.post("/signUp",
                 email: email,                        // It will return the user value in these format
                 password: hash
             })
-            res.json({user, message:"Account created"})
+            res.json({user, message:"Account created Successfully"})
 
 
         })
@@ -71,7 +71,7 @@ async (req,res)=>{
         
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ error: "email is not valid" });
+            return res.status(400).json({ error: "Email is not valid" });
         }
 
 
@@ -79,7 +79,7 @@ async (req,res)=>{
         let user = await User.findOne({email})
         if(!user){
            return res.json({
-                error:"user does not exists"
+                error:"User does not exists"
             })
         } 
 
@@ -94,7 +94,7 @@ async (req,res)=>{
             }
             if(result){
                 const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET)
-                res.json({user,token, message:"logged in succesfully"})
+                res.json({user,token, message:"LoggedIn Succesfully"})
             }
             else if(password!=user.password){
                 return res.status(405).json({
