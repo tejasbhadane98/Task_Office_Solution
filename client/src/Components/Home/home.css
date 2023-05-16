@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+nav {
+    width: 100%;
+    height: 50px;
+    border: 3px solid;
+    border-color: aliceblue;
+    border-bottom-color: rgb(60, 158, 200);
+    background-color: rgb(245, 245, 245);
+}
+.middle {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color:#F5F5F5;
+}
+#img-2{
+    margin-top: -35px;
+    width: 30px;
+    height: 30px;
+    float: right;
+    padding: 10px 130px;
+}
+.username {
+    position: absolute;
+    margin-top: -20px;
+    margin-left: 52%;
+    float: right;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    color: #A6A6A6;
+}
+.head{
+    font-size: 30px;
+    color:#4C57B6;
+    font-family: "Open Sans", sans-serif;
+}

@@ -11,32 +11,25 @@ const jwt = require("jsonwebtoken")
 router.post("/signUp",
     body('email').isEmail(),
     body('password').isLength({ min: 8, max: 16 }),
-    body('confirmPassword').isLength({ min: 8, max: 16 }),async (req, res) => {
+    body('confirmpassword').isLength({ min: 8, max: 16 }),async (req, res) => {
     try {
         // console.log(req.body)
-        let {email, password, confirmPassword} = req.body
+        let {email, password, confirmpassword} = req.body
         let user = await User.findOne({email})
         if(user){
             return res.json({error:"User already exits"})
         };
-        if(password!==confirmPassword){
+        if(password !== confirmpassword){
             return res.json({
                 error:"Password and confirm password does not match"
             })
         }
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
+        const error = validationResult(req);
+        if (!error.isEmpty()) {
             // console.log("sign up error called",errors,req.body.confirmpassword)
             return res.status(400).json({ error: "Minimum length of password should be 8" });
         }
-        
-      
-        
-       
-        
-        bcrypt.hash(password, 10, async function(err, hash){
-            // It Will Store hash in the password DB.
-            
+        bcrypt.hash(password, 10, async function(err, hash){ 
             if (err) {
                 return res.status(500).json({
                     status: "Failed",
